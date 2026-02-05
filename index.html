@@ -2,91 +2,100 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>新北市政府消防局 - 歲末活動網頁D</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>115年歲末工作心得分享及交流活動</title>
     <style>
-        body { font-family: "Microsoft JhengHei", sans-serif; line-height: 1.6; color: #333; max-width: 1000px; margin: 0 auto; padding: 20px; background-color: #f4f4f4; }
-        header { text-align: center; padding: 20px 0; background-color: #d32f2f; color: white; border-radius: 8px; margin-bottom: 20px; }
+        body, html { margin: 0; padding: 0; font-family: "Microsoft JhengHei", sans-serif; background-color: #fdf2f2; color: #333; }
+        .container { max-width: 480px; margin: 0 auto; padding: 0 20px 40px 20px; text-align: center; }
+        .header { background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%); color: #fff; padding: 30px 20px; border-radius: 0 0 30px 30px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .header h1 { margin: 0; font-size: 22px; color: #fff; }
         
-        /* 頂部連結按鈕 */
-        .info-section { display: flex; gap: 15px; justify-content: center; margin-bottom: 30px; flex-wrap: wrap; }
-        .btn { display: inline-block; padding: 12px 24px; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; transition: background 0.3s; cursor: pointer; border: none; font-size: 16px; }
-        .btn-blue { background-color: #1976d2; }
-        .btn-green { background-color: #388e3c; }
-        .btn-red { background-color: #e53935; }
-        .btn:hover { opacity: 0.9; }
+        /* 橫幅公告 (J2) */
+        #banner-j2 { background-color: #fff9c4; color: #b71c1c; margin: 10px auto; padding: 10px; font-weight: bold; border-radius: 8px; font-size: 14px; border: 1px solid #fbc02d; display: none; }
+
+        .nav-btn {
+            display: flex; align-items: center; justify-content: center; background-color: white; color: #d32f2f;
+            text-decoration: none; margin-bottom: 15px; padding: 18px; border-radius: 15px; font-size: 18px;
+            font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-left: 6px solid #d32f2f; transition: 0.2s; cursor: pointer;
+        }
+        .nav-btn:active { transform: scale(0.97); background-color: #fff8f8; }
         
-        /* 選項區塊佈局 */
-        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
-        .option-card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; transition: transform 0.2s; }
-        .option-card:hover { transform: translateY(-5px); }
-        .option-card h3 { color: #d32f2f; margin-top: 0; }
+        /* 選項 1 專用顏色 */
+        .btn-lottery { background-color: #fff9c4; border-left-color: #fbc02d; }
         
-        /* 隱藏選項 5 的樣式 */
+        /* 選項 5 隱藏 */
         .option-hidden { display: none; }
 
-        @media (max-width: 600px) {
-            .info-section { flex-direction: column; align-items: stretch; }
-        }
+        .card-box { background-color: white; padding: 15px; border-radius: 20px; margin-top: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .card-box img { width: 100%; border-radius: 12px; margin-bottom: 10px; }
+        .fb-btn { background-color: #1877F2; color: white; text-decoration: none; padding: 12px; border-radius: 50px; font-weight: bold; display: block; }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>115年歲末工作心得分享及交流活動</h1>
-    <p>活動地點與名單查詢系統</p>
-</header>
-
-<section class="info-section">
-    <a href="https://drive.google.com/file/d/1H5SCaVUtp9P3-qkXDWD9LqBvepemGhpn/view?usp=sharing" target="_blank" class="btn btn-blue">📍 查看活動配置圖 (連結 E)</a>
-    <a href="https://docs.google.com/spreadsheets/d/1M9A7q2qWdlRdYpMkR_-2nJd3GM6iAdEpYaTClCc1-jE/edit?gid=1583911779#gid=1583911779" target="_blank" class="btn btn-green">📋 查看人員名單 (連結 F)</a>
-</section>
-
-<main class="grid-container">
-    <div class="option-card">
-        <h3>選項 1</h3>
-        <p>點擊參與歲末抽獎活動</p>
-        <button onclick="checkLuckyDraw()" class="btn btn-red">進入抽獎</button>
+<div class="container">
+    <div class="header">
+        <h1>115年歲末工作心得分享及交流活動</h1>
+        <div id="banner-j2"></div>
     </div>
 
-    <div class="option-card">
-        <h3>選項 2</h3>
-        <p>相關資訊說明</p>
-    </div>
+    <div class="nav-btn btn-lottery" onclick="goLottery()">🏆 查看尾牙中獎名單</div>
 
-    <div class="option-card">
-        <h3>選項 3</h3>
-        <p>相關資訊說明</p>
-    </div>
+    <a href="https://drive.google.com/file/d/1H5SCaVUtp9P3-qkXDWD9LqBvepemGhpn/view?usp=sharing" class="nav-btn" target="_blank">🗺️ 查看活動配置圖</a>
 
-    <div class="option-card">
-        <h3>選項 4</h3>
-        <p>相關資訊說明</p>
-    </div>
+    <a href="https://docs.google.com/spreadsheets/d/1M9A7q2qWdlRdYpMkR_-2nJd3GM6iAdEpYaTClCc1-jE/edit?gid=1583911779#gid=1583911779" class="nav-btn" target="_blank">📋 查看人員名單</a>
 
-    <div class="option-card option-hidden" id="option5">
-        <img src="REPLACE_IMAGE_URL" alt="選項 5" style="width:100%; border-radius:4px;">
-        <h3>選項 5</h3>
-        <p>即將更新...</p>
-        <a href="REPLACE_LINK_URL" class="btn btn-blue">查看詳情</a>
+    <a href="https://youtu.be/SW3MR3P-XIg?si=uXWVJToR81Hbusm1" class="nav-btn" target="_blank">🎶 尾牙前補運</a>
+
+    <a id="option-5" href="在此填入選項5網址" class="nav-btn option-hidden" target="_blank">✨ 選項 5 標題</a>
+
+    <div class="card-box">
+        <h3 style="color:#d32f2f">✨ 年終好運「馬」上到</h3>
+        <img src="https://drive.google.com/uc?id=1ueFqxhps0KJVawiXuJZ4r89XXUNcXoyO" alt="好運馬">
+        <a href="https://www.facebook.com/share/v/183zPvtiX6/" class="fb-btn" target="_blank">👍 前往 FB 點亮好運</a>
     </div>
-</main>
+</div>
 
 <script>
-    function checkLuckyDraw() {
-        // 設定目標時間：2026年2月6日 上午 8:00
-        const targetDate = new Date('2026-02-06T08:00:00');
-        const now = new Date();
+    // ⚠️ 如需使用公告功能，請在此填入您 Google 試算表的 CSV 網址
+    const CSV_URL = ""; 
 
-        if (now < targetDate) {
-            // 8時前：彈出警示
+    async function loadNotices() {
+        if (!CSV_URL) return;
+        try {
+            const res = await fetch(CSV_URL + "?t=" + Date.now());
+            const text = await res.text();
+            const rows = text.split('\n').map(r => r.split(',').map(c => c.replace(/"/g, '').trim()));
+            const j1 = rows[0][9];
+            const j2 = rows[1][9];
+
+            if (j1 && !sessionStorage.getItem('j1_seen')) {
+                alert(j1);
+                sessionStorage.setItem('j1_seen', 'true');
+            }
+            if (j2) {
+                const banner = document.getElementById('banner-j2');
+                banner.innerText = "📢 " + j2;
+                banner.style.display = "block";
+            }
+        } catch (e) { console.error("公告讀取失敗", e); }
+    }
+
+    // 選項 1 時間判斷邏輯
+    function goLottery() {
+        // 設定目標時間為 2026年 2月 6日 08:00 (JavaScript 月份從 0 開始，所以 1 代表 2月)
+        const targetTime = new Date(2026, 1, 6, 8, 0, 0); 
+        const currentTime = new Date();
+
+        if (currentTime < targetTime) {
             alert("別急 抽獎還沒開始");
         } else {
-            // 8時後：導引到 C 網頁 (請將下面網址替換成實際的 C 網頁 URL)
-            window.location.href = "https://example.com/page-C"; 
+            // 8時後導向 C 網頁
+            window.location.href = "https://tonykoala74.github.io/lottery-list/";
         }
     }
-</script>
 
+    window.onload = loadNotices;
+</script>
 </body>
 </html>
