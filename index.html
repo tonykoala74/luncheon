@@ -10,21 +10,26 @@
         .header { background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%); color: #fff; padding: 30px 20px; border-radius: 0 0 30px 30px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
         .header h1 { margin: 0; font-size: 22px; color: #fff; }
         
-        /* 橫幅公告 (J2) */
         #banner-j2 { background-color: #fff9c4; color: #b71c1c; margin: 10px auto; padding: 10px; font-weight: bold; border-radius: 8px; font-size: 14px; border: 1px solid #fbc02d; display: none; }
 
         .nav-btn {
             display: flex; align-items: center; justify-content: center; background-color: white; color: #d32f2f;
             text-decoration: none; margin-bottom: 15px; padding: 18px; border-radius: 15px; font-size: 18px;
             font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-left: 6px solid #d32f2f; transition: 0.2s; cursor: pointer;
+            box-sizing: border-box; width: 100%;
         }
         .nav-btn:active { transform: scale(0.97); background-color: #fff8f8; }
-        
-        /* 選項 1 專用顏色 */
         .btn-lottery { background-color: #fff9c4; border-left-color: #fbc02d; }
-        
-        /* 選項 5 隱藏 */
-        .option-hidden { display: none; }
+
+        /* --- 選項 5 隱藏保險：CSS 最高權限 --- */
+        #option-5.option-hidden { 
+            display: none !important; 
+            visibility: hidden !important;
+            height: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            overflow: hidden !important;
+        }
 
         .card-box { background-color: white; padding: 15px; border-radius: 20px; margin-top: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
         .card-box img { width: 100%; border-radius: 12px; margin-bottom: 10px; }
@@ -47,7 +52,7 @@
 
     <a href="https://youtu.be/SW3MR3P-XIg?si=uXWVJToR81Hbusm1" class="nav-btn" target="_blank">🎶 尾牙前補運</a>
 
-    <a id="option-5" href="在此填入選項5網址" class="nav-btn option-hidden" target="_blank">✨ 選項 5 標題</a>
+    <a id="option-5" href="#" class="nav-btn option-hidden" style="display: none !important;">✨ 今日新增選項 (待更新)</a>
 
     <div class="card-box">
         <h3 style="color:#d32f2f">✨ 年終好運「馬」上到</h3>
@@ -57,10 +62,15 @@
 </div>
 
 <script>
-    // ⚠️ 如需使用公告功能，請在此填入您 Google 試算表的 CSV 網址
     const CSV_URL = ""; 
 
     async function loadNotices() {
+        // 強制檢查選項 5 是否該隱藏 (JavaScript 備援)
+        const opt5 = document.getElementById('option-5');
+        if (opt5 && opt5.classList.contains('option-hidden')) {
+            opt5.style.setProperty('display', 'none', 'important');
+        }
+
         if (!CSV_URL) return;
         try {
             const res = await fetch(CSV_URL + "?t=" + Date.now());
@@ -68,7 +78,6 @@
             const rows = text.split('\n').map(r => r.split(',').map(c => c.replace(/"/g, '').trim()));
             const j1 = rows[0][9];
             const j2 = rows[1][9];
-
             if (j1 && !sessionStorage.getItem('j1_seen')) {
                 alert(j1);
                 sessionStorage.setItem('j1_seen', 'true');
@@ -81,16 +90,12 @@
         } catch (e) { console.error("公告讀取失敗", e); }
     }
 
-    // 選項 1 時間判斷邏輯
     function goLottery() {
-        // 設定目標時間為 2026年 2月 6日 08:00 (JavaScript 月份從 0 開始，所以 1 代表 2月)
         const targetTime = new Date(2026, 1, 6, 8, 0, 0); 
         const currentTime = new Date();
-
         if (currentTime < targetTime) {
             alert("別急 抽獎還沒開始");
         } else {
-            // 8時後導向 C 網頁
             window.location.href = "https://tonykoala74.github.io/lottery-list/";
         }
     }
